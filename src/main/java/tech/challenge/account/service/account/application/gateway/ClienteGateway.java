@@ -17,14 +17,21 @@ public class ClienteGateway implements ClienteGatewayPort {
     private final ClienteRepository clienteRepository;
     private final ClienteMapper clienteMapper;
 
-
     @Override
     public List<Cliente> buscarClientes() {
         var clientesEntity = this.clienteRepository.findAll();
+
+        if (clientesEntity == null) {
+            return new ArrayList<>();
+        }
+
         List<Cliente> clientes = new ArrayList<Cliente>();
 
         for (ClienteEntity clienteEntity : clientesEntity) {
-            clientes.add(clienteMapper.toDomain(clienteEntity));
+            var cliente = clienteMapper.toDomain(clienteEntity);
+            if (cliente != null) {
+                clientes.add(cliente);
+            }
         }
         return clientes;
     }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tech.challenge.account.service.account.builders.ClienteEntityBuilder;
+import tech.challenge.account.service.account.helpers.ClienteEntityHelper;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
@@ -31,7 +31,7 @@ public class ClienteRepositoryIT {
     @Test
     void devePermitirCriarCliente() {
         // Arrange
-        var cliente = ClienteEntityBuilder.Build();
+        var cliente = ClienteEntityHelper.gerarClienteEntity();
 
         // Act
         var clienteCriado = clienteRepository.save(cliente);
@@ -108,7 +108,7 @@ public class ClienteRepositoryIT {
     }
 
     private ClienteEntity registrarCliente() {
-        var cliente = ClienteEntityBuilder.Build();
+        var cliente = ClienteEntityHelper.gerarClienteEntity();
         cliente.setId(UUID.fromString("cc2f2531-76ac-4dce-a7ad-4beeacb46d50"));
         return clienteRepository.save(cliente);
     }

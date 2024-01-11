@@ -8,8 +8,8 @@ import lombok.*;
 @Data
 @Table(name = "clientes")
 @Builder(toBuilder = true)
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ClienteEntity extends BaseEntity {
     @Column(nullable = false)
     @NotEmpty(message = "O nome não pode estar vazio")
