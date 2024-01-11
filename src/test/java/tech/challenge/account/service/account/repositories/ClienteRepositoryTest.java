@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tech.challenge.account.service.account.builders.ClienteEntityBuilder;
+import tech.challenge.account.service.account.helpers.ClienteEntityHelper;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
@@ -28,7 +28,7 @@ public class ClienteRepositoryTest {
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        clienteMock = ClienteEntityBuilder.Build();
+        clienteMock = ClienteEntityHelper.gerarClienteEntity();
     }
 
     @AfterEach
