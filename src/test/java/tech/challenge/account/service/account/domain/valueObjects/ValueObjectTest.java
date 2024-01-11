@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValueObjectTest {
 
-    private static class TestValueObject extends ValueObject<String> {
+    private static class TestarValueObject extends ValueObject<String> {
 
-        public TestValueObject(String value) {
+        public TestarValueObject(String value) {
             super(value);
         }
 
@@ -25,7 +25,7 @@ class ValueObjectTest {
     @Test
     void deveCriarUmValueObject() {
         // Act
-        TestValueObject testValueObject = new TestValueObject("Teste");
+        TestarValueObject testValueObject = new TestarValueObject("Teste");
         // Asserts
         assertEquals("Teste", testValueObject.getValue());
     }
@@ -33,15 +33,15 @@ class ValueObjectTest {
     @Test
     void deveLancarExceçãoAoCriarUmValueObjectInvalido() {
         // Act / Asserts
-        assertThrows(AtributoInvalidoException.class, () -> new TestValueObject(null));
+        assertThrows(AtributoInvalidoException.class, () -> new TestarValueObject(null));
     }
 
     @Test
     void deveValidarAIgualdadeEHashcode() {
         // Arrange
-        TestValueObject obj1 = new TestValueObject("Valor1");
-        TestValueObject obj2 = new TestValueObject("Valor1");
-        TestValueObject obj3 = new TestValueObject("Valor2");
+        var obj1 = new TestarValueObject("Valor1");
+        var obj2 = new TestarValueObject("Valor1");
+        var obj3 = new TestarValueObject("Valor2");
 
         // Act / Asserts
         assertEquals(obj1, obj2);
