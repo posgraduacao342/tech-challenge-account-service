@@ -1,25 +1,22 @@
 package tech.challenge.account.service.account.domain.valueObjects;
 
 import  tech.challenge.account.service.account.domain.exception.AtributoInvalidoException;
-import lombok.Data;
 
 import java.util.Objects;
 
-@Data
-public class CPF {
-
-    private final String value;
+public class CPF extends ValueObject<String> {
 
     public CPF(String value) {
-        validarCPF(value);
-        this.value = value;
+        super(value);
+        validar(value);
     }
 
-    private void validarCPF(String cpf) {
+    @Override
+    protected void validar(String cpf) {
         String cpfLimpo = cpf.replaceAll("[^0-9]", "");
 
-        if (cpfLimpo.length() != 11) {
-            throw new AtributoInvalidoException("O CPF deve conter 11 dígitos.");
+        if (!cpf.matches("[0-9.-]+") || cpfLimpo.length() != 11) {
+            throw new AtributoInvalidoException("O CPF deve conter apenas números, pontos e traços, e ter 11 dígitos.");
         }
 
         int primeiroDigitoVerificador = calcularDigito(cpfLimpo.substring(0, 9), 10);
@@ -40,23 +37,5 @@ public class CPF {
         }
         int resto = soma % 11;
         return (resto < 2) ? 0 : (11 - resto);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CPF cpf1 = (CPF) o;
-        return value.equals(cpf1.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return value;
     }
 }
