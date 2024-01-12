@@ -14,8 +14,8 @@ import tech.challenge.account.service.account.infrastructure.db.repositories.Cli
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+
 import static java.text.MessageFormat.format;
 
 @Component
@@ -62,6 +62,15 @@ public class ClienteGateway implements ClienteGatewayPort {
         return clienteMapper.toDomain(clienteEntity);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public boolean clienteExiste(CPF cpf,  Email email) {
+        var clienteCpf = clienteRepository.findByCpf(cpf.getValue());
+        var clienteEmail = clienteRepository.findByEmail(email.getValue());
+
+        return clienteCpf.isPresent() || clienteEmail.isPresent();
+    }
+
     @Transactional
     @Override
     public Cliente cadastrarCliente(Cliente cliente) {
@@ -71,7 +80,10 @@ public class ClienteGateway implements ClienteGatewayPort {
 
     @Transactional
     @Override
-    public void deletarCliente(UUID id) {
+    public void deletarCliente(UUID id) throws RecursoNaoEncontratoException {
+        if(!clienteRepository.existsById(id)){
+            throw new RecursoNaoEncontratoException(format("Registro não encontrado com id {0}", id));
+        }
         this.clienteRepository.deleteById(id);
     }
 }

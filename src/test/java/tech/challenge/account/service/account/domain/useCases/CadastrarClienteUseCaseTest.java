@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tech.challenge.account.service.account.domain.dto.CadastrarClienteDto;
 import tech.challenge.account.service.account.domain.entities.Cliente;
 import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
@@ -15,20 +16,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
-public class BuscarClientesUseCaseTest {
-
+public class CadastrarClienteUseCaseTest {
     @Mock
     ClienteGatewayPort clienteGatewayPort;
 
-    BuscarClientesUseCase useCase;
+    CadastrarClienteUseCase useCase;
 
     AutoCloseable openMocks;
 
     @BeforeEach
     void setup() {
         openMocks = MockitoAnnotations.openMocks(this);
-        useCase = new BuscarClientesUseCase(clienteGatewayPort);
+        useCase = new CadastrarClienteUseCase(clienteGatewayPort);
     }
 
     @AfterEach
@@ -37,32 +38,16 @@ public class BuscarClientesUseCaseTest {
     }
 
     @Test
-    void deveRetornarUmaListaDeClientes() {
+    void deveCadastrarUmCliente() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
-        var lista = Arrays.asList(cliente);
-        when(clienteGatewayPort.buscarClientes()).thenReturn(lista);
+        var dto = new CadastrarClienteDto("matheus@test.com", "497.109.640-03", "Matheus");
+        when(clienteGatewayPort.cadastrarCliente(cliente)).thenReturn(cliente);
 
         // Act
-        var clientes = useCase.execute();
+        var response = useCase.execute(dto);
 
         // Assert
-        assertEquals(clientes.size(), lista.size());
-        verify(clienteGatewayPort, times(1)).buscarClientes();
-    }
-
-    @Test
-    void deveRetornarUmaListaDeVazia() {
-        // Arrange
-        List<Cliente> listaVazia = new ArrayList<>();
-
-        when(clienteGatewayPort.buscarClientes()).thenReturn(listaVazia);
-
-        // Act
-        var clientes = useCase.execute();
-
-        // Assert
-        assertEquals(clientes.size(), listaVazia.size());
-        verify(clienteGatewayPort, times(1)).buscarClientes();
+        assertEquals(cliente.getNome(), response.getNome());
     }
 }
