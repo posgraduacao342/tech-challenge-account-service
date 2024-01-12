@@ -22,4 +22,14 @@ public class ClienteMapper {
         return cliente;
     }
 
+    public ClienteEntity toEntity(Cliente cliente) {
+        var clienteEntity = new ClienteEntity();
+        clienteEntity.setId(cliente.getId());
+        clienteEntity.setNome(cliente.getNome());
+        clienteEntity.setEmail(cliente.getEmail().getValue());
+        clienteEntity.setCpf(cliente.getCpf().getValue());
+
+        return clienteEntity;
+    }
+
 }

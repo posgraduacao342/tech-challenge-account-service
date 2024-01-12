@@ -17,7 +17,9 @@ import tech.challenge.account.service.account.infrastructure.db.repositories.Cli
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import static java.text.MessageFormat.format;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -107,4 +109,98 @@ class ClienteGatewayTest {
         assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientes());
     }
 
+    @Test
+    void buscarClientePorCPF_DeveRetornarCliente() {
+        // Arrange
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
+
+        var cliente = ClienteHelper.gerarCliente();
+
+        when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.of(clienteEntity));
+        when(clienteMapper.toDomain(Mockito.any(ClienteEntity.class))).thenReturn(cliente);
+
+        // Act
+        var resultado = clienteGateway.buscarClientePorCpf(cliente.getCpf());
+
+        // Assert
+        assertEquals(cliente.getEmail(), resultado.getEmail());
+        assertEquals(cliente.getNome(),resultado.getNome());
+        assertEquals(cliente.getCpf(), resultado.getCpf());
+        verify(clienteRepository, times(1)).findByCpf(clienteEntity.getCpf());
+    }
+
+    @Test
+    void buscarClientePorCPF_DeveRetornarExcecaoQuandoOClienteNaoForEncontrado() {
+        // Arrange
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
+        var cliente = ClienteHelper.gerarCliente();
+        when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.empty());
+
+        // Act / Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorCpf(cliente.getCpf()));
+        assertEquals(format("Registro não encontrado com cpf {0}", cliente.getCpf().getValue()), exception.getMessage());
+    }
+
+    @Test
+    void buscarClientePorEmail_DeveRetornarCliente() {
+        // Arrange
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
+
+        var cliente = ClienteHelper.gerarCliente();
+
+        when(clienteRepository.findByEmail(clienteEntity.getEmail())).thenReturn(Optional.of(clienteEntity));
+        when(clienteMapper.toDomain(Mockito.any(ClienteEntity.class))).thenReturn(cliente);
+
+        // Act
+        var resultado = clienteGateway.buscarClientePorEmail(cliente.getEmail());
+
+        // Assert
+        assertEquals(cliente.getEmail(), resultado.getEmail());
+        assertEquals(cliente.getNome(),resultado.getNome());
+        assertEquals(cliente.getCpf(), resultado.getCpf());
+        verify(clienteRepository, times(1)).findByEmail(clienteEntity.getEmail());
+    }
+
+    @Test
+    void buscarClientePorEmail_DeveRetornarExcecaoQuandoOClienteNaoForEncontrado() {
+        // Arrange
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
+        var cliente = ClienteHelper.gerarCliente();
+        when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.empty());
+
+        // Act / Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorEmail(cliente.getEmail()));
+        assertEquals(format("Registro não encontrado com email {0}", cliente.getEmail().getValue()), exception.getMessage());
+    }
+
+    @Test
+    void cadastrarCliente_DeveCadastrarOCliente() {
+        // Arrange
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
+        var cliente = ClienteHelper.gerarCliente();
+        when(clienteRepository.save(clienteEntity)).thenReturn(clienteEntity);
+        when(clienteMapper.toEntity(Mockito.any(Cliente.class))).thenReturn(clienteEntity);
+        when(clienteMapper.toDomain(Mockito.any(ClienteEntity.class))).thenReturn(cliente);
+
+        // Act
+        var resultado = clienteGateway.cadastrarCliente(cliente);
+
+        // Assert
+        assertEquals(cliente.getNome(), resultado.getNome());
+        assertEquals(cliente.getEmail().getValue(), resultado.getEmail().getValue());
+        assertEquals(cliente.getCpf().getValue(), resultado.getCpf().getValue());
+        verify(clienteRepository, times(1)).save(clienteEntity);
+    }
+
+    @Test
+    void deletarClientePorId_DeveDeletarOCliente() {
+        // Arrange
+        var cliente = ClienteHelper.gerarCliente();
+
+        // Act
+        clienteGateway.deletarCliente(cliente.getId());
+
+        // Act / Assert
+        verify(clienteRepository, times(1)).deleteById(cliente.getId());
+    }
 }
