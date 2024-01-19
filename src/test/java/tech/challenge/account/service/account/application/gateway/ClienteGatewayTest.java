@@ -112,9 +112,8 @@ class ClienteGatewayTest {
     @Test
     void buscarClientePorCPF_DeveRetornarCliente() {
         // Arrange
-        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
-
         var cliente = ClienteHelper.gerarCliente();
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity(cliente);
 
         when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.of(clienteEntity));
         when(clienteMapper.toDomain(Mockito.any(ClienteEntity.class))).thenReturn(cliente);
@@ -196,11 +195,25 @@ class ClienteGatewayTest {
     void deletarClientePorId_DeveDeletarOCliente() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
+        when(clienteRepository.existsById(cliente.getId())).thenReturn(true);
 
         // Act
         clienteGateway.deletarCliente(cliente.getId());
 
         // Act / Assert
+        verify(clienteRepository, times(1)).existsById(cliente.getId());
         verify(clienteRepository, times(1)).deleteById(cliente.getId());
+    }
+
+    @Test
+    void deletarClientePorId_DeveRetornarExcecaoQuandoClienteNaoForEncontrado() {
+        //Arrange
+        var cliente = ClienteHelper.gerarCliente();
+        when(clienteRepository.existsById(cliente.getId())).thenReturn(false);
+
+        // Act / Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.deletarCliente(cliente.getId()));
+        assertEquals(format("Registro não encontrado com id {0}", cliente.getId()), exception.getMessage());
+        verify(clienteRepository, times(1)).existsById(cliente.getId());
     }
 }

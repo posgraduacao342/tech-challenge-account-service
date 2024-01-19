@@ -17,6 +17,7 @@ import java.util.UUID;
 import static java.text.MessageFormat.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -115,5 +116,15 @@ public class ClienteGatewayIT {
 
         // Assert
         assertTrue(cliente.isEmpty());
+    }
+
+    @Test
+    void deletarClientePorId_DeveRetornarExcecaoQuandoClienteNaoForEncontrado() {
+        //Arrange
+        var id = UUID.fromString("f0aed070-9000-4773-88cb-25f035fcc647");
+
+        // Act / Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.deletarCliente(id));
+        assertEquals(format("Registro não encontrado com id {0}", id), exception.getMessage());
     }
 }

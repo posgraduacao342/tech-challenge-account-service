@@ -1,7 +1,5 @@
 package tech.challenge.account.service.account.domain.ports.in;
 
-//import java.util.Optional;
-
-public interface UseCasePort<Response, Params> {
-    Response execute(Params params);
+public interface UseCasePort<Response, Request> {
+    Response execute(Request request);
 }
