@@ -22,7 +22,7 @@ public class ClienteHelper {
     }
 
     private static CPF buscarCPFPadrao() {
-        return new CPF("123.456.789-09");
+        return new CPF("648.131.787-82");
     }
 
     private static Email buscarEmailPadrao() {
@@ -35,5 +35,13 @@ public class ClienteHelper {
 
     private static String buscarNomePadrao() {
         return "Matheus";
+    }
+
+    public static Cliente gerarClienteAdam() {
+        return gerarCliente(
+                Optional.of(new CPF("092.420.830-97")),
+                Optional.of(new Email("Adam@gmail.com")),
+                Optional.of("Adam"),
+                Optional.of(UUID.fromString("5f789b39-4295-42c1-a65b-cfca5b987db2")));
     }
 }
