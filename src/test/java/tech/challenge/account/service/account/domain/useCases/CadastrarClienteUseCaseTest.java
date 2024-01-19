@@ -41,7 +41,8 @@ public class CadastrarClienteUseCaseTest {
     void deveCadastrarUmCliente() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
-        var dto = new CadastrarClienteDto("matheus@test.com", "497.109.640-03", "Matheus");
+        cliente.setId(null);
+        var dto = new CadastrarClienteDto("email_padrao@test.com", "648.131.787-82", "Matheus");
         when(clienteGatewayPort.cadastrarCliente(cliente)).thenReturn(cliente);
 
         // Act

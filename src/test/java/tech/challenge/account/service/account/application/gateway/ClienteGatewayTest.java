@@ -112,9 +112,8 @@ class ClienteGatewayTest {
     @Test
     void buscarClientePorCPF_DeveRetornarCliente() {
         // Arrange
-        var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
-
         var cliente = ClienteHelper.gerarCliente();
+        var clienteEntity = ClienteEntityHelper.gerarClienteEntity(cliente);
 
         when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.of(clienteEntity));
         when(clienteMapper.toDomain(Mockito.any(ClienteEntity.class))).thenReturn(cliente);

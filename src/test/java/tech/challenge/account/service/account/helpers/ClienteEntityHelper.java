@@ -1,5 +1,7 @@
 package tech.challenge.account.service.account.helpers;
 
+import tech.challenge.account.service.account.domain.entities.Cliente;
+import tech.challenge.account.service.account.domain.valueObjects.CPF;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
 
 import java.util.Optional;
@@ -15,6 +17,13 @@ public class ClienteEntityHelper {
 
     public static ClienteEntity gerarClienteEntity() {
         return gerarClienteEntity(Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    public static ClienteEntity gerarClienteEntity(Cliente cliente) {
+        return gerarClienteEntity(
+                Optional.of(cliente.getCpf().getValue()),
+                Optional.of(cliente.getEmail().getValue()),
+                Optional.of(cliente.getNome()));
     }
 
     private static String buscarCPFPadrao() {
