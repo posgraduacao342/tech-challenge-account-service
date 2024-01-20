@@ -17,9 +17,8 @@ public class CadastrarClienteUseCase implements UseCasePort<Cliente, CadastrarCl
     public Cliente execute(CadastrarClienteDto dto) {
         var emailValido = new Email(dto.getEmail());
         var cpfValido = new CPF(dto.getCpf());
-        var optionalCliente = this.clienteGatewayPort.clienteExiste(cpfValido, emailValido);
 
-        if(optionalCliente) {
+        if(clienteGatewayPort.clienteExiste(cpfValido, emailValido)) {
             throw  new RecursoJaExisteException("Email ou Cpf já possui cadastro");
         }
 

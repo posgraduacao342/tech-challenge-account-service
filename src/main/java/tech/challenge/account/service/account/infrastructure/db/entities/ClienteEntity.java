@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.UUID;
+
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 @Table(name = "clientes")
 @Builder(toBuilder = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteEntity extends BaseEntity {
