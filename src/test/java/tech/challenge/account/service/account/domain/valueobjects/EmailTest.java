@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.valueObjects;
+package tech.challenge.account.service.account.domain.valueobjects;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

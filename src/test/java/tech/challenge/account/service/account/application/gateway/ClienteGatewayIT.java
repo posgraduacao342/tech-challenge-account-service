@@ -6,8 +6,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import tech.challenge.account.service.account.domain.entities.Cliente;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 

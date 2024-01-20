@@ -1,7 +1,6 @@
 package tech.challenge.account.service.account.helpers;
 
 import tech.challenge.account.service.account.domain.entities.Cliente;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
 
 import java.util.Optional;

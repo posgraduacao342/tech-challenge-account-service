@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.valueObjects;
+package tech.challenge.account.service.account.domain.valueobjects;
 
 import  tech.challenge.account.service.account.domain.exception.AtributoInvalidoException;
 
@@ -11,7 +11,7 @@ public class CPF extends ValueObject<String> {
 
     @Override
     protected void validar(String cpf) {
-        String cpfLimpo = cpf.replaceAll("[^0-9]", "");
+        String cpfLimpo = cpf.replaceAll("\\D", "");
 
         if (!cpf.matches("[0-9.-]+") || cpfLimpo.length() != 11) {
             throw new AtributoInvalidoException("O CPF deve conter apenas números, pontos e traços, e ter 11 dígitos.");

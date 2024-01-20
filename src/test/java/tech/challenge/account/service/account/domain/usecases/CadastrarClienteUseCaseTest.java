@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,8 +8,8 @@ import org.mockito.MockitoAnnotations;
 import tech.challenge.account.service.account.domain.dto.CadastrarClienteDto;
 import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
 import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 
 
@@ -63,9 +63,7 @@ class CadastrarClienteUseCaseTest {
 
 
         // Act
-        Exception exception = assertThrows(RecursoJaExisteException.class, () -> {
-            useCase.execute(dto);
-        });
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
 
         // Assert
         assertNotNull(exception);

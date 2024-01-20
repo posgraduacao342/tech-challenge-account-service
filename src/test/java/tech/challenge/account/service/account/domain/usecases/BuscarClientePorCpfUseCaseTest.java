@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import tech.challenge.account.service.account.application.gateway.ClienteGateway;
 import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,9 +50,7 @@ class BuscarClientePorCpfUseCaseTest {
         var cpf = "882.507.488-32";
         when(gateway.buscarClientePorCpf(new CPF(cpf))).thenThrow(RecursoNaoEncontratoException.class);
         // Act
-        Exception exception = assertThrows(RecursoNaoEncontratoException.class, () -> {
-            useCase.execute(cpf);
-        });
+        Exception exception = assertThrows(RecursoNaoEncontratoException.class, () -> useCase.execute(cpf));
 
         // Assert
         assertNotNull(exception);

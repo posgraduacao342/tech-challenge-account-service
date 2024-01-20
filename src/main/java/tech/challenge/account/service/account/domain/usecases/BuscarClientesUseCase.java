@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import lombok.AllArgsConstructor;
 import tech.challenge.account.service.account.domain.entities.Cliente;

@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,7 @@ import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPor
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +40,7 @@ class BuscarClientesUseCaseTest {
     void deveRetornarUmaListaDeClientes() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
-        var lista = Arrays.asList(cliente);
+        var lista = Collections.singletonList(cliente);
         when(clienteGatewayPort.buscarClientes()).thenReturn(lista);
 
         // Act
