@@ -18,7 +18,7 @@ import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class DeletarClienteUseCaseTest {
+class DeletarClienteUseCaseTest {
     @Mock
     ClienteGateway gateway;
     AutoCloseable openMocks;

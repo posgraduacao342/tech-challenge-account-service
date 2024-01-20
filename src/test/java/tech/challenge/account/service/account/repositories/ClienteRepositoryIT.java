@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class ClienteRepositoryIT {
+class ClienteRepositoryIT {
 
     @Autowired
     private ClienteRepository clienteRepository;
