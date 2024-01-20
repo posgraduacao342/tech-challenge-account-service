@@ -1,28 +1,16 @@
 package tech.challenge.account.service.account.mappers;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import tech.challenge.account.service.account.application.gateway.ClienteGateway;
 import tech.challenge.account.service.account.application.presenters.mappers.ClienteMapper;
 import tech.challenge.account.service.account.domain.entities.Cliente;
-import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
-import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static java.text.MessageFormat.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.willThrow;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class ClienteMapperTest {
     UUID id;

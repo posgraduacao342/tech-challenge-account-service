@@ -3,8 +3,8 @@ package tech.challenge.account.service.account.application.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.challenge.account.service.account.application.gateway.ClienteGateway;
-import tech.challenge.account.service.account.domain.useCases.BuscarClientePorCPFUseCase;
-import tech.challenge.account.service.account.domain.useCases.BuscarClientesUseCase;
+import tech.challenge.account.service.account.domain.usecases.BuscarClientePorCPFUseCase;
+import tech.challenge.account.service.account.domain.usecases.BuscarClientesUseCase;
 
 @Configuration
 public class Config {

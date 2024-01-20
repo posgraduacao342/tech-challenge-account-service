@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.useCases;
+package tech.challenge.account.service.account.domain.usecases;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,7 @@ import tech.challenge.account.service.account.application.gateway.ClienteGateway
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureTestDatabase

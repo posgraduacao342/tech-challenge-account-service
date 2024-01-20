@@ -2,8 +2,8 @@ package tech.challenge.account.service.account.domain.ports.out;
 
 import tech.challenge.account.service.account.domain.entities.Cliente;
 import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 
 import java.util.List;
 import java.util.UUID;

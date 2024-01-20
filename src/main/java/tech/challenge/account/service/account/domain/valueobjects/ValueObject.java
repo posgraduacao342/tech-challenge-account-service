@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.domain.valueObjects;
+package tech.challenge.account.service.account.domain.valueobjects;
 
 import java.util.Objects;
 public abstract class ValueObject<T> {

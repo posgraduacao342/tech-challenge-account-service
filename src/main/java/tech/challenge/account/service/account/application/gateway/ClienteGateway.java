@@ -7,8 +7,8 @@ import tech.challenge.account.service.account.application.presenters.mappers.Cli
 import tech.challenge.account.service.account.domain.entities.Cliente;
 import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
 import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
@@ -29,11 +29,7 @@ public class ClienteGateway implements ClienteGatewayPort {
     public List<Cliente> buscarClientes() {
         var clientesEntity = this.clienteRepository.findAll();
 
-        if (clientesEntity == null) {
-            return new ArrayList<>();
-        }
-
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        List<Cliente> clientes = new ArrayList<>();
 
         for (ClienteEntity clienteEntity : clientesEntity) {
             var cliente = clienteMapper.toDomain(clienteEntity);

@@ -6,8 +6,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import tech.challenge.account.service.account.domain.entities.Cliente;
-import tech.challenge.account.service.account.domain.valueObjects.CPF;
-import tech.challenge.account.service.account.domain.valueObjects.Email;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
 
@@ -17,7 +17,6 @@ import java.util.UUID;
 import static java.text.MessageFormat.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -54,7 +53,7 @@ class ClienteGatewayIT {
         var cliente = clienteGateway.buscarClientePorCpf(cpf);
 
         // Assert
-        assertEquals(cliente.getEmail().getValue(), "Vick@gmail.com");
+        assertEquals("Vick@gmail.com", cliente.getEmail().getValue());
         assertEquals(cliente.getCpf().getValue(), cpf.getValue());
     }
 
@@ -77,7 +76,7 @@ class ClienteGatewayIT {
         var cliente = clienteGateway.buscarClientePorEmail(email);
 
         // Assert
-        assertEquals(cliente.getCpf().getValue(), "092.420.830-97");
+        assertEquals("092.420.830-97", cliente.getCpf().getValue());
         assertEquals(cliente.getEmail().getValue(), email.getValue());
     }
 
