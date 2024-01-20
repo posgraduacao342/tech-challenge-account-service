@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import tech.challenge.account.service.account.domain.exception.AtributoInvalidoException;
 
-public class CPFTest {
+class CPFTest {
 
     @Test
     void deveGerarUmCPFValido() {

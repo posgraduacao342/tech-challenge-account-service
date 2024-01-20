@@ -13,7 +13,7 @@ import tech.challenge.account.service.account.helpers.ClienteHelper;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class BuscarClientePorCpfUseCaseTest {
+class BuscarClientePorCpfUseCaseTest {
     @Mock
     ClienteGateway gateway;
     BuscarClientePorCPFUseCase useCase;

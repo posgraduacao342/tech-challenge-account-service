@@ -6,7 +6,7 @@ import tech.challenge.account.service.account.infrastructure.db.entities.Cliente
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ClienteEntityTest {
+class ClienteEntityTest {
     // Arrange
     String nome = "Nome";
     String email = "teste@email.com";

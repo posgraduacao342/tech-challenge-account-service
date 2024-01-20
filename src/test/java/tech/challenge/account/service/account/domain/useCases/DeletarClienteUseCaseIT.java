@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class DeletarClienteUseCaseIT {
+class DeletarClienteUseCaseIT {
     @Autowired
     private ClienteGateway gateway;
 

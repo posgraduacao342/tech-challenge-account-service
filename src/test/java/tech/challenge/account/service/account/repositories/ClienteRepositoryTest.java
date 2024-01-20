@@ -16,7 +16,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-public class ClienteRepositoryTest {
+class ClienteRepositoryTest {
 
     @Mock
     private ClienteRepository clienteRepository;
