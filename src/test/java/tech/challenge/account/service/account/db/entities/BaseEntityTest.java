@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class BaseEntityTest {
     // Arrange
@@ -46,9 +47,10 @@ public class BaseEntityTest {
         // Act
         var baseEntity = new BaseEntity();
 
-//        // Assert
-//        assertNull(baseEntity.getCpf());
-//        assertNull(baseEntity.getNome());
-//        assertNull(baseEntity.getEmail());
+        // Assert
+        assertNull(baseEntity.getId());
+        assertNull(baseEntity.getDataCriacao());
+        assertNull(baseEntity.getDataAtualizacao());
+        assertNull(baseEntity.getDataDelecao());
     }
 }

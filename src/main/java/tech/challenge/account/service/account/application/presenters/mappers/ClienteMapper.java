@@ -12,14 +12,12 @@ public class ClienteMapper {
         var email = new Email(clienteEntity.getEmail());
         var cpf = new CPF(clienteEntity.getCpf());
 
-        var cliente = Cliente.builder()
+        return Cliente.builder()
                 .nome(clienteEntity.getNome())
                 .cpf(cpf)
                 .id(clienteEntity.getId())
                 .email(email)
                 .build();
-
-        return cliente;
     }
 
     public ClienteEntity toEntity(Cliente cliente) {

@@ -1,7 +1,6 @@
 package tech.challenge.account.service.account.domain.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @Getter
