@@ -1,6 +1,7 @@
 package tech.challenge.account.service.account.application.presenters.mappers;
 
 import org.springframework.stereotype.Component;
+import tech.challenge.account.service.account.application.presenters.responses.CriarClienteResponse;
 import tech.challenge.account.service.account.domain.entities.Cliente;
 import tech.challenge.account.service.account.domain.valueobjects.CPF;
 import tech.challenge.account.service.account.domain.valueobjects.Email;
@@ -30,4 +31,12 @@ public class ClienteMapper {
         return clienteEntity;
     }
 
+    public CriarClienteResponse toResponse(Cliente cliente) {
+        var response = new CriarClienteResponse();
+        response.setCpf(cliente.getCpf().getValue());
+        response.setEmail(cliente.getEmail().getValue());
+        response.setNome(cliente.getNome());
+        response.setId(cliente.getId());
+        return response;
+    }
 }
