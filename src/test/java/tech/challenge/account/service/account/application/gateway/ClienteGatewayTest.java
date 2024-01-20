@@ -133,12 +133,13 @@ class ClienteGatewayTest {
         // Arrange
         var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
         var cliente = ClienteHelper.gerarCliente();
+        var cpf = cliente.getCpf();
         when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.empty());
 
         String mensagemEsperada = format("Registro não encontrado com cpf {0}", cliente.getCpf().getValue());
 
         // Act / Assert
-        assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorCpf(cliente.getCpf()), mensagemEsperada);
+        assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorCpf(cpf), mensagemEsperada);
     }
 
     @Test
