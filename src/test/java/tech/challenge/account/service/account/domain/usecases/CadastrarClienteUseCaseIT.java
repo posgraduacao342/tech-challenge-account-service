@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class CadastrarClienteUseCaseIT {
+class CadastrarClienteUseCaseIT {
     @Autowired
     ClienteGatewayPort clienteGatewayPort;
 
