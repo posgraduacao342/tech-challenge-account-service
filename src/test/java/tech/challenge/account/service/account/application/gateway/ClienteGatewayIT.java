@@ -1,6 +1,9 @@
 package tech.challenge.account.service.account.application.gateway;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -88,6 +91,20 @@ class ClienteGatewayIT {
         // Act / Assert
         Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorEmail(email));
         assertEquals(format("Registro não encontrado com email {0}",email.getValue()), exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "594.148.445-38, Adam@gmail.com, true",
+            "092.420.830-97, teste@email.com, true",
+            "594.148.445-38, teste@email.com, false"
+    }, ignoreLeadingAndTrailingWhitespace = true)
+    void clienteExiste_deveRetornarTrue(String cpf, String email, boolean expectedResult){
+        // Act
+        var result = clienteGateway.clienteExiste(new CPF(cpf), new Email(email));
+
+        // Assert
+        assertEquals(expectedResult, result);
     }
 
     @Test

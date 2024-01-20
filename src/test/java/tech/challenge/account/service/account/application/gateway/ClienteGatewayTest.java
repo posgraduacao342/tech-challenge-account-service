@@ -3,12 +3,16 @@ package tech.challenge.account.service.account.application.gateway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import tech.challenge.account.service.account.application.presenters.mappers.ClienteMapper;
 import tech.challenge.account.service.account.domain.entities.Cliente;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
 import tech.challenge.account.service.account.helpers.ClienteEntityHelper;
 import tech.challenge.account.service.account.helpers.ClienteHelper;
 import tech.challenge.account.service.account.infrastructure.db.entities.ClienteEntity;
@@ -171,6 +175,27 @@ class ClienteGatewayTest {
         // Act / Assert
         Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorEmail(cliente.getEmail()));
         assertEquals(format("Registro não encontrado com email {0}", cliente.getEmail().getValue()), exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "true, true, true",
+            "true, false, true",
+            "false, true, true",
+            "false, false, false",
+    }, ignoreLeadingAndTrailingWhitespace = true)
+    void clienteExiste(boolean cpfExiste, boolean emailExiste, boolean resultadoEsperado) {
+        // Arrange
+        var email = new Email("teste@email.com");
+        var cpf = new CPF("791.598.304-09");
+        when(clienteRepository.existsByEmail(email.getValue())).thenReturn(emailExiste);
+        when(clienteRepository.existsByCpf(cpf.getValue())).thenReturn(cpfExiste);
+
+        // Act
+        var resultado = clienteGateway.clienteExiste(cpf, email);
+
+        // Assert
+        assertEquals(resultadoEsperado, resultado);
     }
 
     @Test

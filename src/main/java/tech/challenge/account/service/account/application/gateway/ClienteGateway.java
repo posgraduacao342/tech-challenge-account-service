@@ -29,10 +29,6 @@ public class ClienteGateway implements ClienteGatewayPort {
     public List<Cliente> buscarClientes() {
         var clientesEntity = this.clienteRepository.findAll();
 
-        if (clientesEntity == null) {
-            return new ArrayList<>();
-        }
-
         List<Cliente> clientes = new ArrayList<Cliente>();
 
         for (ClienteEntity clienteEntity : clientesEntity) {
@@ -65,10 +61,10 @@ public class ClienteGateway implements ClienteGatewayPort {
     @Transactional(readOnly = true)
     @Override
     public boolean clienteExiste(CPF cpf,  Email email) {
-        var clienteCpf = clienteRepository.findByCpf(cpf.getValue());
-        var clienteEmail = clienteRepository.findByEmail(email.getValue());
+        var cpfExiste = clienteRepository.existsByCpf(cpf.getValue());
+        var emailExiste = clienteRepository.existsByEmail(email.getValue());
 
-        return clienteCpf.isPresent() || clienteEmail.isPresent();
+        return cpfExiste || emailExiste;
     }
 
     @Transactional

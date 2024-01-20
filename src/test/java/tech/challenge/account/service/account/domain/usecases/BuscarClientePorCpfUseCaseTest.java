@@ -41,7 +41,7 @@ class BuscarClientePorCpfUseCaseTest {
         var result = useCase.execute(cliente.getCpf().getValue());
 
         // Assert
-        assertEquals(result, cliente);
+        assertEquals(cliente, result);
     }
 
     @Test
