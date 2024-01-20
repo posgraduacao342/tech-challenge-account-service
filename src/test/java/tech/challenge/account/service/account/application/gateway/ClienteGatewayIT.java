@@ -17,7 +17,6 @@ import java.util.UUID;
 import static java.text.MessageFormat.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -54,7 +53,7 @@ class ClienteGatewayIT {
         var cliente = clienteGateway.buscarClientePorCpf(cpf);
 
         // Assert
-        assertEquals(cliente.getEmail().getValue(), "Vick@gmail.com");
+        assertEquals("Vick@gmail.com", cliente.getEmail().getValue());
         assertEquals(cliente.getCpf().getValue(), cpf.getValue());
     }
 
@@ -77,7 +76,7 @@ class ClienteGatewayIT {
         var cliente = clienteGateway.buscarClientePorEmail(email);
 
         // Assert
-        assertEquals(cliente.getCpf().getValue(), "092.420.830-97");
+        assertEquals("092.420.830-97", cliente.getCpf().getValue());
         assertEquals(cliente.getEmail().getValue(), email.getValue());
     }
 

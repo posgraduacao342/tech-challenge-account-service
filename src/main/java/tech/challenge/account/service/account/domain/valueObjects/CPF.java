@@ -2,8 +2,6 @@ package tech.challenge.account.service.account.domain.valueObjects;
 
 import  tech.challenge.account.service.account.domain.exception.AtributoInvalidoException;
 
-import java.util.Objects;
-
 public class CPF extends ValueObject<String> {
 
     public CPF(String value) {
