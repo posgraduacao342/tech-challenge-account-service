@@ -29,7 +29,7 @@ public class ClienteGateway implements ClienteGatewayPort {
     public List<Cliente> buscarClientes() {
         var clientesEntity = this.clienteRepository.findAll();
 
-        if (clientesEntity == null) {
+        if (clientesEntity.isEmpty()) {
             return new ArrayList<>();
         }
 
