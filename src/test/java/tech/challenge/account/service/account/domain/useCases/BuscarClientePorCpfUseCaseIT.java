@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class BuscarClientePorCpfUseCaseIT {
+class BuscarClientePorCpfUseCaseIT {
     @Autowired
     private ClienteGateway clienteGateway;
 

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class ClienteGatewayIT {
+class ClienteGatewayIT {
 
     @Autowired
     private ClienteGateway clienteGateway;

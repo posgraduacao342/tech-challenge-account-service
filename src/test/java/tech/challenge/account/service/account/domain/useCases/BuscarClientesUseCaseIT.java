@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class BuscarClientesUseCaseIT {
+class BuscarClientesUseCaseIT {
     @Autowired
     private ClienteGateway clienteGateway;
 
