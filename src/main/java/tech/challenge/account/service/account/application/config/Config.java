@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import tech.challenge.account.service.account.application.gateway.ClienteGateway;
 import tech.challenge.account.service.account.domain.usecases.BuscarClientePorCPFUseCase;
 import tech.challenge.account.service.account.domain.usecases.BuscarClientesUseCase;
+import tech.challenge.account.service.account.domain.usecases.CadastrarClienteUseCase;
 
 @Configuration
 public class Config {
@@ -15,5 +16,10 @@ public class Config {
     @Bean
     public BuscarClientePorCPFUseCase buscarClientePorCpfUseCaseConfig(ClienteGateway clienteGateway) {
         return new BuscarClientePorCPFUseCase(clienteGateway);
+    }
+
+    @Bean
+    public CadastrarClienteUseCase cadastrarClienteUseCase(ClienteGateway clienteGateway) {
+        return new CadastrarClienteUseCase(clienteGateway);
     }
 }

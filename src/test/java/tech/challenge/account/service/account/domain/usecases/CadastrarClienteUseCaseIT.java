@@ -1,0 +1,84 @@
+package tech.challenge.account.service.account.domain.usecases;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+import tech.challenge.account.service.account.domain.dto.CadastrarClienteDto;
+import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
+import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
+import tech.challenge.account.service.account.domain.valueobjects.CPF;
+import tech.challenge.account.service.account.domain.valueobjects.Email;
+import tech.challenge.account.service.account.helpers.ClienteHelper;
+import tech.challenge.account.service.account.infrastructure.db.repositories.ClienteRepository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@AutoConfigureTestDatabase
+@Transactional
+public class CadastrarClienteUseCaseIT {
+    @Autowired
+    ClienteGatewayPort clienteGatewayPort;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    CadastrarClienteUseCase useCase;
+
+    @Test
+    void devePermitirCriarTabela() {
+        var totalDeRegistros = clienteRepository.count();
+        assertThat(totalDeRegistros).isNotNegative();
+    }
+
+    @Test
+    void deveCadastrarUmCliente() {
+        // Arrange
+        var cliente = ClienteHelper.gerarCliente();
+        cliente.setId(null);
+        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+
+        // Act
+        var response = useCase.execute(dto);
+        var clienteCriado = clienteRepository.findByCpf(dto.getCpf());
+
+        // Assert
+        assertEquals(clienteCriado.get().getNome(), response.getNome());
+
+        clienteRepository.deleteById(clienteCriado.get().getId());
+    }
+
+    @Test
+    void deveLancarException_QuandoOEmailJáExistir() {
+        // Arrange
+        var cliente = ClienteHelper.gerarCliente();
+        cliente.setEmail(new Email("Adam@gmail.com"));
+        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+
+        // Act
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
+
+        // Assert
+        assertNotNull(exception);
+        assertEquals("Email ou Cpf já possui cadastro", exception.getMessage());
+    }
+
+    @Test
+    void deveLancarException_QuandoOCPFJáExistir() {
+        // Arrange
+        var cliente = ClienteHelper.gerarCliente();
+        cliente.setCpf(new CPF("092.420.830-97"));
+        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+
+        // Act
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
+
+        // Assert
+        assertNotNull(exception);
+        assertEquals("Email ou Cpf já possui cadastro", exception.getMessage());
+    }
+}
