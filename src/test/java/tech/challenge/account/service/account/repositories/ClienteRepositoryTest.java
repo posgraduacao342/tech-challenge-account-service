@@ -94,8 +94,7 @@ class ClienteRepositoryTest {
         var cliente = clienteRepository.findByCpf(clienteMock.getCpf());
 
         //Assert
-        assertThat(cliente.isPresent()).isTrue();
-        assertThat(cliente.get()).isEqualTo(clienteMock);
+        assertThat(cliente).isPresent().contains(clienteMock);
     }
 
     @Test
@@ -107,8 +106,7 @@ class ClienteRepositoryTest {
         var cliente = clienteRepository.findByEmail(clienteMock.getEmail());
 
         //Assert
-        assertThat(cliente.isPresent()).isTrue();
-        assertThat(cliente.get()).isEqualTo(clienteMock);
+        assertThat(cliente).isPresent().contains(clienteMock);
     }
 
     @Test

@@ -137,12 +137,13 @@ class ClienteGatewayTest {
         // Arrange
         var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
         var cliente = ClienteHelper.gerarCliente();
+        var cpf = cliente.getCpf();
         when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.empty());
 
         String mensagemEsperada = format("Registro não encontrado com cpf {0}", cliente.getCpf().getValue());
 
         // Act / Assert
-        assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorCpf(cliente.getCpf()), mensagemEsperada);
+        assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorCpf(cpf), mensagemEsperada);
     }
 
     @Test
@@ -170,10 +171,11 @@ class ClienteGatewayTest {
         // Arrange
         var clienteEntity = ClienteEntityHelper.gerarClienteEntity();
         var cliente = ClienteHelper.gerarCliente();
+        var email = cliente.getEmail();
         when(clienteRepository.findByCpf(clienteEntity.getCpf())).thenReturn(Optional.empty());
 
         // Act / Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorEmail(cliente.getEmail()));
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.buscarClientePorEmail(email));
         assertEquals(format("Registro não encontrado com email {0}", cliente.getEmail().getValue()), exception.getMessage());
     }
 
@@ -235,10 +237,11 @@ class ClienteGatewayTest {
     void deletarClientePorId_DeveRetornarExcecaoQuandoClienteNaoForEncontrado() {
         //Arrange
         var cliente = ClienteHelper.gerarCliente();
+        var id = cliente.getId();
         when(clienteRepository.existsById(cliente.getId())).thenReturn(false);
 
         // Act / Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.deletarCliente(cliente.getId()));
+        Exception exception = assertThrows(RuntimeException.class, () -> clienteGateway.deletarCliente(id));
         assertEquals(format("Registro não encontrado com id {0}", cliente.getId()), exception.getMessage());
         verify(clienteRepository, times(1)).existsById(cliente.getId());
     }

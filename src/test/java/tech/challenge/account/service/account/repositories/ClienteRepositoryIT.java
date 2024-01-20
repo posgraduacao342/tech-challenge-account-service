@@ -78,11 +78,11 @@ class ClienteRepositoryIT {
         var clienteEncontradoOpt = clienteRepository.findByCpf("092.420.830-97");
 
         //Assert
-        Assertions.assertThat(clienteEncontradoOpt.isPresent()).isTrue();
+        Assertions.assertThat(clienteEncontradoOpt).isPresent();
         var clienteEncontrado = clienteEncontradoOpt.get();
         Assertions.assertThat(clienteEncontrado.getNome()).isEqualTo("Adam");
         Assertions.assertThat(clienteEncontrado.getEmail()).isEqualTo("Adam@gmail.com");
-        Assertions.assertThat(clienteEncontrado.getId().toString()).isEqualTo("5f789b39-4295-42c1-a65b-cfca5b987db2");
+        Assertions.assertThat(clienteEncontrado.getId().toString()).hasToString("5f789b39-4295-42c1-a65b-cfca5b987db2");
     }
 
     @Test
@@ -91,11 +91,11 @@ class ClienteRepositoryIT {
         //Act
         var clienteEncontradoOpt = clienteRepository.findByEmail("Adam@gmail.com");
         //Assert
-        Assertions.assertThat(clienteEncontradoOpt.isPresent()).isTrue();
+        Assertions.assertThat(clienteEncontradoOpt).isPresent();
         var clienteEncontrado = clienteEncontradoOpt.get();
         Assertions.assertThat(clienteEncontrado.getNome()).isEqualTo("Adam");
         Assertions.assertThat(clienteEncontrado.getCpf()).isEqualTo("092.420.830-97");
-        Assertions.assertThat(clienteEncontrado.getId().toString()).isEqualTo("5f789b39-4295-42c1-a65b-cfca5b987db2");
+        Assertions.assertThat(clienteEncontrado.getId().toString()).hasToString("5f789b39-4295-42c1-a65b-cfca5b987db2");
     }
 
     @Test
