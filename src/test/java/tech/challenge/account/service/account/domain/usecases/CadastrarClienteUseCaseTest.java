@@ -41,6 +41,7 @@ class CadastrarClienteUseCaseTest {
         var cliente = ClienteHelper.gerarCliente();
         cliente.setId(null);
         var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        when(clienteGatewayPort.clienteExiste(cliente.getCpf(), cliente.getEmail())).thenReturn(false);
         when(clienteGatewayPort.cadastrarCliente(cliente)).thenReturn(cliente);
 
         // Act
