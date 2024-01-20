@@ -1,6 +1,9 @@
 package tech.challenge.account.service.account.domain.valueobjects;
 
+import lombok.Getter;
+
 import java.util.Objects;
+@Getter
 public abstract class ValueObject<T> {
 
     protected final T value;
@@ -18,10 +21,6 @@ public abstract class ValueObject<T> {
         if (o == null || getClass() != o.getClass()) return false;
         ValueObject<?> that = (ValueObject<?>) o;
         return Objects.equals(value, that.value);
-    }
-
-    public T getValue() {
-        return value;
     }
 
     @Override
