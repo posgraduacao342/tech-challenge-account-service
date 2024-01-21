@@ -43,8 +43,8 @@ class CadastrarClienteUseCaseIT {
         var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
-        var response = useCase.execute(dto);
-        var clienteCriado = clienteRepository.findByCpf(dto.getCpf());
+        var response = useCase.execute(request);
+        var clienteCriado = clienteRepository.findByCpf(request.getCpf());
 
         // Assert
         assertEquals(clienteCriado.get().getNome(), response.getNome());
@@ -53,14 +53,14 @@ class CadastrarClienteUseCaseIT {
     }
 
     @Test
-    void deveLancarException_QuandoOEmailJáExistir() {
+    void deveLancarException_QuandoOEmailJaExistir() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setEmail(new Email("Adam@gmail.com"));
         var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
-        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(request));
 
         // Assert
         assertNotNull(exception);
@@ -68,14 +68,14 @@ class CadastrarClienteUseCaseIT {
     }
 
     @Test
-    void deveLancarException_QuandoOCPFJáExistir() {
+    void deveLancarException_QuandoOCPFJaExistir() {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setCpf(new CPF("092.420.830-97"));
         var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
-        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(request));
 
         // Assert
         assertNotNull(exception);

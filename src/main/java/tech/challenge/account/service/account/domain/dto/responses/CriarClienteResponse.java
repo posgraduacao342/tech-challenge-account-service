@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.application.presenters.responses;
+package tech.challenge.account.service.account.domain.dto.responses;
 
 import lombok.Getter;
 import lombok.Setter;

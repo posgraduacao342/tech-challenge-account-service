@@ -45,7 +45,7 @@ class CadastrarClienteUseCaseTest {
         when(clienteGatewayPort.cadastrarCliente(cliente)).thenReturn(cliente);
 
         // Act
-        var response = useCase.execute(dto);
+        var response = useCase.execute(request);
 
         // Assert
         assertEquals(cliente.getNome(), response.getNome());
@@ -58,13 +58,13 @@ class CadastrarClienteUseCaseTest {
         cliente.setId(null);
         var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
         when(clienteGatewayPort.clienteExiste(
-                new CPF(dto.getCpf()),
-                new Email(dto.getEmail())
+                new CPF(request.getCpf()),
+                new Email(request.getEmail())
         )).thenReturn(true);
 
 
         // Act
-        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
+        Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(request));
 
         // Assert
         assertNotNull(exception);
