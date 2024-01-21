@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tech.challenge.account.service.account.domain.dto.CadastrarClienteDto;
+import tech.challenge.account.service.account.domain.dto.requets.CriarClienteRequest;
 import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
 import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
 import tech.challenge.account.service.account.domain.valueobjects.CPF;
@@ -40,7 +40,7 @@ class CadastrarClienteUseCaseTest {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setId(null);
-        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
         when(clienteGatewayPort.clienteExiste(cliente.getCpf(), cliente.getEmail())).thenReturn(false);
         when(clienteGatewayPort.cadastrarCliente(cliente)).thenReturn(cliente);
 
@@ -56,7 +56,7 @@ class CadastrarClienteUseCaseTest {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setId(null);
-        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
         when(clienteGatewayPort.clienteExiste(
                 new CPF(dto.getCpf()),
                 new Email(dto.getEmail())

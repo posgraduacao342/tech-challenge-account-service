@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tech.challenge.account.service.account.domain.dto.CadastrarClienteDto;
+import tech.challenge.account.service.account.domain.dto.requets.CriarClienteRequest;
 import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
 import tech.challenge.account.service.account.domain.ports.out.ClienteGatewayPort;
 import tech.challenge.account.service.account.domain.valueobjects.CPF;
@@ -40,7 +40,7 @@ class CadastrarClienteUseCaseIT {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setId(null);
-        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
         var response = useCase.execute(dto);
@@ -57,7 +57,7 @@ class CadastrarClienteUseCaseIT {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setEmail(new Email("Adam@gmail.com"));
-        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
         Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
@@ -72,7 +72,7 @@ class CadastrarClienteUseCaseIT {
         // Arrange
         var cliente = ClienteHelper.gerarCliente();
         cliente.setCpf(new CPF("092.420.830-97"));
-        var dto = new CadastrarClienteDto(cliente.getEmail().getValue(),cliente.getCpf().getValue(), cliente.getNome());
+        var request = new CriarClienteRequest(cliente.getNome(), cliente.getEmail().getValue(), cliente.getCpf().getValue());
 
         // Act
         Exception exception = assertThrows(RecursoJaExisteException.class, () -> useCase.execute(dto));
