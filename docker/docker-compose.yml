@@ -13,8 +13,6 @@ services:
       - db
     environment:
       - DB_URL=jdbc:postgresql://db:5432/postgres
-    volumes:
-      - ../docker-application.properties:/path/to/application.properties
   db:
     image: 'postgres:13.1-alpine'
     container_name: db
