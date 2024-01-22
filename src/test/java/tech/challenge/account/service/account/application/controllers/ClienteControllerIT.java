@@ -1,4 +1,4 @@
-package tech.challenge.account.service.account.application.gateway.controller;
+package tech.challenge.account.service.account.application.controllers;
 
 
 import org.junit.jupiter.api.Test;
