@@ -45,7 +45,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{clienteId}")
-    public void deletarCLiente(@PathVariable(value = "clienteId") String clienteId) {
+    public void deletarCLiente(@PathVariable(value = "clienteId") String clienteId) throws RecursoNaoEncontratoException {
         deletarClienteUseCase.execute(UUID.fromString(clienteId));
     }
 }
