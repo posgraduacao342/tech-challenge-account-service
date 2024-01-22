@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tech.challenge.account.service.account.application.presenters.mappers.ClienteMapper;
 import tech.challenge.account.service.account.domain.dto.requets.CriarClienteRequest;
-import tech.challenge.account.service.account.domain.dto.responses.CriarClienteResponse;
+import tech.challenge.account.service.account.domain.dto.responses.ClienteResponse;
 import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
 import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
 import tech.challenge.account.service.account.domain.usecases.BuscarClientePorCPFUseCase;
@@ -27,19 +27,19 @@ public class ClienteController {
     private final DeletarClienteUseCase deletarClienteUseCase;
 
     @PostMapping
-    public CriarClienteResponse cadastrarCliente(@RequestBody @Valid CriarClienteRequest clienteRequest) throws RecursoJaExisteException {
+    public ClienteResponse cadastrarCliente(@RequestBody @Valid CriarClienteRequest clienteRequest) throws RecursoJaExisteException {
         var clienteCriado = cadastrarClienteUseCase.execute(clienteRequest);
         return clienteMapper.toResponse(clienteCriado);
     }
 
     @GetMapping
-    public List<CriarClienteResponse> buscarClientes() {
+    public List<ClienteResponse> buscarClientes() {
         var clientes = buscarClientesUseCase.execute();
         return clienteMapper.toReposnse(clientes);
     }
 
     @GetMapping("/{cpf}")
-    public CriarClienteResponse buscarClientePorCpf(@PathVariable(value = "cpf") String cpf) throws RecursoNaoEncontratoException {
+    public ClienteResponse buscarClientePorCpf(@PathVariable(value = "cpf") String cpf) throws RecursoNaoEncontratoException {
         var cliente = buscarClientePorCPFUseCase.execute(cpf);
         return clienteMapper.toResponse(cliente);
     }
