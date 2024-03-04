@@ -51,6 +51,15 @@ public class ClienteGateway implements ClienteGatewayPort {
 
     @Transactional(readOnly = true)
     @Override
+    public Cliente buscarClientePorId(UUID id) throws RecursoNaoEncontratoException {
+        var clienteEntity = clienteRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontratoException(format("Registro não encontrado com o id {0}", id)));
+
+        return clienteMapper.toDomain(clienteEntity);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public Cliente buscarClientePorEmail(Email email) throws RecursoNaoEncontratoException {
         var clienteEntity = clienteRepository.findByEmail(email.getValue())
                 .orElseThrow(() -> new RecursoNaoEncontratoException(format("Registro não encontrado com email {0}", email.getValue())));

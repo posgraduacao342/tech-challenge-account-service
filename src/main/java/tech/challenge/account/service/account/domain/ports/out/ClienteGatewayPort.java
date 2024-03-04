@@ -14,5 +14,6 @@ public interface ClienteGatewayPort {
     void deletarCliente(UUID id);
     boolean clienteExiste(CPF cpf,  Email email);
     Cliente buscarClientePorCpf(CPF cpf) throws RecursoNaoEncontratoException;
+    Cliente buscarClientePorId(UUID id) throws RecursoNaoEncontratoException;
     Cliente buscarClientePorEmail(Email email) throws RecursoNaoEncontratoException;
 }
