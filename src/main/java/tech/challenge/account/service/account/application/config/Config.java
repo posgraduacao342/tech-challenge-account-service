@@ -7,6 +7,7 @@ import tech.challenge.account.service.account.domain.usecases.BuscarClientePorCP
 import tech.challenge.account.service.account.domain.usecases.BuscarClientesUseCase;
 import tech.challenge.account.service.account.domain.usecases.CadastrarClienteUseCase;
 import tech.challenge.account.service.account.domain.usecases.DeletarClienteUseCase;
+import tech.challenge.account.service.account.domain.usecases.BuscarClientePorIdUseCase;
 
 @Configuration
 public class Config {
@@ -18,6 +19,11 @@ public class Config {
     @Bean
     public BuscarClientePorCPFUseCase buscarClientePorCpfUseCaseConfig(ClienteGateway clienteGateway) {
         return new BuscarClientePorCPFUseCase(clienteGateway);
+    }
+
+    @Bean
+    public BuscarClientePorIdUseCase buscarClientePorIdUseCaseConfig(ClienteGateway clienteGateway) {
+        return new BuscarClientePorIdUseCase(clienteGateway);
     }
 
     @Bean

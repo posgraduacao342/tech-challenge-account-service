@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.util.UUID;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "clientes")

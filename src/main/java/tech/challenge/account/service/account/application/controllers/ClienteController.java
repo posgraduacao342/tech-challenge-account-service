@@ -9,6 +9,7 @@ import tech.challenge.account.service.account.domain.dto.responses.ClienteRespon
 import tech.challenge.account.service.account.domain.exception.RecursoJaExisteException;
 import tech.challenge.account.service.account.domain.exception.RecursoNaoEncontratoException;
 import tech.challenge.account.service.account.domain.usecases.BuscarClientePorCPFUseCase;
+import tech.challenge.account.service.account.domain.usecases.BuscarClientePorIdUseCase;
 import tech.challenge.account.service.account.domain.usecases.BuscarClientesUseCase;
 import tech.challenge.account.service.account.domain.usecases.CadastrarClienteUseCase;
 import tech.challenge.account.service.account.domain.usecases.DeletarClienteUseCase;
@@ -24,6 +25,7 @@ public class ClienteController {
     private final ClienteMapper clienteMapper;
     private final BuscarClientesUseCase buscarClientesUseCase;
     private final BuscarClientePorCPFUseCase buscarClientePorCPFUseCase;
+    private final BuscarClientePorIdUseCase buscarClientePorIdUseCase;
     private final DeletarClienteUseCase deletarClienteUseCase;
 
     @PostMapping
@@ -38,9 +40,15 @@ public class ClienteController {
         return clienteMapper.toReposnse(clientes);
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/cpf/{cpf}")
     public ClienteResponse buscarClientePorCpf(@PathVariable(value = "cpf") String cpf) throws RecursoNaoEncontratoException {
         var cliente = buscarClientePorCPFUseCase.execute(cpf);
+        return clienteMapper.toResponse(cliente);
+    }
+
+    @GetMapping("/id/{clienteId}")
+    public ClienteResponse buscarClientePorId(@PathVariable(value = "clienteId") String clienteId) throws RecursoNaoEncontratoException {
+        var cliente = buscarClientePorIdUseCase.execute(UUID.fromString(clienteId));
         return clienteMapper.toResponse(cliente);
     }
 
