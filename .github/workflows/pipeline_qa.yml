@@ -86,6 +86,7 @@ jobs:
       
       - name: Set up environment variables
         run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV && echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV && echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+      
       - name: Generate pipeline/application/secret.yaml
         run: |
           echo "apiVersion: v1" > pipeline/application/secret.yaml
@@ -99,7 +100,7 @@ jobs:
           echo "  DATABASE_URL: $DATABASE_URL" >> pipeline/application/secret.yaml
 
       - name: Configure AWS Credentials
-        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
+        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_DEFAULT_REGION: us-east-1
 
