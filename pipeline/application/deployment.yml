@@ -39,7 +39,7 @@ spec:
                 secretKeyRef:
                   name: tech-challenge-account-secret
                   key: PASSWORD
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tech-challenge-account

@@ -86,6 +86,20 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: Set up environment variables
+        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV && echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV && echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+      - name: Generate pipeline/application/secret.yaml
+        run: |
+          echo "apiVersion: v1" > pipeline/application/secret.yaml
+          echo "kind: Secret" >> pipeline/application/secret.yaml
+          echo "metadata:" >> pipeline/application/secret.yaml
+          echo "  name: tech-challenge-account-secret" >> pipeline/application/secret.yaml
+          echo "type: Opaque" >> pipeline/application/secret.yaml
+          echo "data:" >> pipeline/application/secret.yaml
+          echo "  USERNAME: $USERNAME" >> pipeline/application/secret.yaml
+          echo "  PASSWORD: $AMQP_URL" >> pipeline/application/secret.yaml
+          echo "  DATABASE_URL: $DATABASE_URL" >> pipeline/application/secret.yaml
 
       - name: Configure AWS Credentials
         run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
