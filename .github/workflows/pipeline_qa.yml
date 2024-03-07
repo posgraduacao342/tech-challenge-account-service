@@ -61,9 +61,6 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile ecr-user
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile ecr-user
 
-          # Adicione esta parte para incluir a sessão
-          aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }} --profile ecr-user
-
           aws configure set region us-east-1 --profile ecr-user
           aws ecr get-login-password --region us-east-1 --profile ecr-user | docker login --username AWS --password-stdin 767397892937.dkr.ecr.us-east-1.amazonaws.com
 
