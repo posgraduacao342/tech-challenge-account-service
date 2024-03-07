@@ -96,7 +96,7 @@ jobs:
           echo "type: Opaque" >> pipeline/application/secret.yaml
           echo "data:" >> pipeline/application/secret.yaml
           echo "  USERNAME: $USERNAME" >> pipeline/application/secret.yaml
-          echo "  PASSWORD: $AMQP_URL" >> pipeline/application/secret.yaml
+          echo "  PASSWORD: $PASSWORD" >> pipeline/application/secret.yaml
           echo "  DATABASE_URL: $DATABASE_URL" >> pipeline/application/secret.yaml
 
       - name: Configure AWS Credentials
