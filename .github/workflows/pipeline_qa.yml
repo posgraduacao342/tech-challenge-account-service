@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Set up environment variables
-        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV && echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV && echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+        run: echo "SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }}" >> $GITHUB_ENV && echo "DATASOURCE_USERNAME=${{ secrets.DATASOURCE_USERNAME }}" >> $GITHUB_ENV && echo "DATASOURCE_PASSWORD=${{ secrets.DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
       
       - name: Generate pipeline/application/secret.yaml
         run: |
@@ -95,9 +95,9 @@ jobs:
           echo "  name: tech-challenge-account-secret" >> pipeline/application/secret.yaml
           echo "type: Opaque" >> pipeline/application/secret.yaml
           echo "data:" >> pipeline/application/secret.yaml
-          echo "  USERNAME: $USERNAME" >> pipeline/application/secret.yaml
-          echo "  PASSWORD: $PASSWORD" >> pipeline/application/secret.yaml
-          echo "  DATABASE_URL: $DATABASE_URL" >> pipeline/application/secret.yaml
+          echo "  SPRING_DATASOURCE_URL: $SPRING_DATASOURCE_URL" >> pipeline/application/secret.yaml
+          echo "  DATASOURCE_USERNAME: $DATASOURCE_USERNAME" >> pipeline/application/secret.yaml
+          echo "  DATASOURCE_PASSWORD: $DATASOURCE_PASSWORD" >> pipeline/application/secret.yaml
 
       - name: Configure AWS Credentials
         run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
